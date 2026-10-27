@@ -1,0 +1,835 @@
+/**
+ * GRAB THE CRAB — Beach Whack-a-Mole Arcade
+ * Sun-Drenched Tropical Palette & Responsive Interactive Styles
+ * Aerial Beach Shoreline with Open Sand Playfield
+ * Copyright © 2026 Gamility (All Rights Reserved)
+ */
+
+/* ==========================================================================
+   CSS TOKENS & VARIABLES
+   ========================================================================== */
+:root {
+  /* Aerial Ocean Tones (Matching Photo Reference) */
+  --ocean-deep: #0077b6;
+  --ocean-mid: #0096c7;
+  --ocean-surf: #48cae4;
+  --ocean-foam: #e0faff;
+  --wet-sand: #c99e71;
+
+  /* Beach Sand Tones */
+  --sand-highlight: #fff2cc;
+  --sand-base: #f5dfa8;
+  --sand-mid: #ebd092;
+  --sand-shadow: #d8b776;
+
+  /* Crab & Hazard Colors */
+  --crab-red: #ff4757;
+  --crab-red-dark: #ee5253;
+  --crab-coral: #ff6b81;
+  --crab-belly: #ff9f89;
+  --puffer-yellow: #facc15;
+  --puffer-orange: #ea580c;
+
+  /* UI Tokens */
+  --text-dark: #0f172a;
+  --text-light: #f8fafc;
+  --font-display: 'Outfit', -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  --shadow-beach: 0 10px 25px rgba(113, 63, 18, 0.25);
+  --shadow-wood: 0 14px 35px rgba(0, 0, 0, 0.45);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 20%, #0d1b2a 0%, #080c16 100%);
+  font-family: var(--font-body);
+  color: var(--text-light);
+  overflow: hidden;
+  position: fixed;
+}
+
+/* ==========================================================================
+   TOP GAMILITY RETURN RIBBON
+   ========================================================================== */
+.top-nav-ribbon {
+  height: 52px;
+  background: rgba(8, 12, 22, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+}
+
+.ribbon-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ribbon-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #ffffff;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.ribbon-brand:hover {
+  transform: translateY(-1px);
+}
+
+.brand-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+.ribbon-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-ribbon-icon {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.btn-ribbon-icon:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.05);
+}
+
+.ribbon-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.ribbon-back-btn:hover {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: #f59e0b;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   ARCADE WRAPPER (CENTERED FOR PC / WINDOWS VIEW, FULLSCREEN ON MOBILE)
+   ========================================================================== */
+.arcade-wrapper {
+  width: 100%;
+  height: calc(100vh - 52px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: radial-gradient(ellipse at 50% 30%, #1e293b 0%, #0b1120 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient Tropical Shore Illumination */
+.arcade-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* GAME VIEWPORT CABINET */
+.game-viewport {
+  width: 100%;
+  max-width: 480px;
+  height: min(840px, calc(100vh - 76px));
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  background-color: var(--sand-base);
+}
+
+/* ==========================================================================
+   HUD HEADER BAR
+   ========================================================================== */
+.game-hud-bar {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  right: 12px;
+  height: 48px;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 0.35rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 40;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+.hud-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.hud-lbl {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+/* Left Hearts / Lives */
+.hud-lives-group {
+  min-width: 90px;
+}
+
+.hud-hearts {
+  display: flex;
+  gap: 0.25rem;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.heart-icon {
+  opacity: 0.25;
+  filter: grayscale(1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.heart-icon.active {
+  opacity: 1;
+  filter: grayscale(0);
+  animation: heartPulse 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes heartPulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+/* Center Score & Combo */
+.hud-score-group {
+  align-items: center;
+  text-align: center;
+}
+
+.hud-score-display {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.hud-score-val {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #fde047;
+  text-shadow: 0 2px 10px rgba(253, 224, 71, 0.4);
+  line-height: 1;
+}
+
+.hud-combo-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+  color: #ffffff;
+  padding: 0.12rem 0.45rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+  animation: comboPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes comboPop {
+  0% { transform: scale(0.6); }
+  60% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+/* Right Stats & Pause */
+.hud-stats-group {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hud-high-box {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.hud-high-val {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #e2e8f0;
+}
+
+.btn-pause-game {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.btn-pause-game:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   THE BEACH STAGE LAYERS (AERIAL TOP-DOWN VIEW)
+   ========================================================================== */
+/* ==========================================================================
+   THE BEACH STAGE (UNIFIED CONTINUOUS SAND PLAYFIELD)
+   ========================================================================== */
+.beach-stage {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  cursor: crosshair;
+  background-color: var(--sand-base);
+  background-image: radial-gradient(ellipse at 50% 50%, var(--sand-highlight) 0%, var(--sand-base) 60%, var(--sand-mid) 100%);
+}
+
+/* Subtle micro-sand grain texture overlay */
+.beach-stage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#ca8a04 0.75px, transparent 0.75px);
+  background-size: 24px 24px;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+/* TOP LAYER: OCEAN WATER SVG HEADER (SMOOTH NON-REPEATING CURVE OVER CONTINUOUS SAND) */
+.ocean-water-header {
+  position: absolute;
+  top: 0;
+  left: -2%;
+  width: 104%;
+  height: 18%;
+  pointer-events: none;
+  z-index: 5;
+  animation: tideSwell 7s infinite ease-in-out alternate;
+}
+
+.ocean-water-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes tideSwell {
+  0% { transform: scaleY(0.96) translateX(0); }
+  100% { transform: scaleY(1.04) translateX(-1.5%); }
+}
+
+/* Decorative Natural Beach Elements (Subtle on Sand) */
+.beach-decor {
+  position: absolute;
+  font-size: 1.25rem;
+  opacity: 0.45;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(113, 63, 18, 0.25));
+}
+.shell-1 { top: 8%; left: 8%; transform: rotate(-20deg); }
+.shell-2 { top: 40%; right: 7%; transform: rotate(15deg); }
+.shell-3 { bottom: 12%; left: 10%; transform: rotate(35deg); }
+.shell-4 { bottom: 18%; right: 12%; font-size: 1rem; opacity: 0.35; }
+
+/* ==========================================================================
+   OPEN SAND CREATURE PLAYFIELD (FREE RANDOM SPATIAL SPAWNS)
+   ========================================================================== */
+.creature-playfield {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+/* DYNAMIC CREATURE NODE (ABSOLUTE POSITIONED ON TOP OF SAND) */
+.creature-node {
+  position: absolute;
+  transform: translate(-50%, -50%) scale(0);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 88px;
+  z-index: 10;
+  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
+  opacity: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Popped up and active */
+.creature-node.up {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+/* Tapped / Caught Feedback */
+.creature-node.hit {
+  transform: translate(-50%, -50%) scale(1.28);
+  opacity: 0.95;
+  filter: brightness(1.25);
+  pointer-events: none;
+  transition: transform 0.12s ease;
+}
+
+/* Scuttling down back into sand */
+.creature-node.down {
+  transform: translate(-50%, -50%) scale(0.15) rotate(15deg);
+  opacity: 0;
+  transition: transform 0.25s cubic-bezier(0.6, -0.28, 0.735, 0.045), opacity 0.22s ease;
+}
+
+/* Sand dust shadow ring under creature */
+.creature-sand-shadow {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 18px;
+  background: radial-gradient(ellipse at center, rgba(113, 63, 18, 0.45) 0%, rgba(113, 63, 18, 0.15) 60%, transparent 100%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   CREATURE SVG ARTWORK STYLING (MATCHING CUTE USER REFERENCE)
+   ========================================================================== */
+
+/* 🦀 1. RED CRAB SVG */
+.crab-svg {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 6px 10px rgba(113, 63, 18, 0.35));
+  animation: crabWiggle 0.45s infinite alternate ease-in-out;
+}
+
+@keyframes crabWiggle {
+  0% { transform: rotate(-2.5deg) translateY(0); }
+  100% { transform: rotate(2.5deg) translateY(-2px); }
+}
+
+/* 🌟 2. GOLDEN CRAB */
+.creature-golden .crab-svg {
+  filter: drop-shadow(0 0 14px rgba(250, 204, 21, 0.9)) drop-shadow(0 6px 10px rgba(113, 63, 18, 0.45));
+  animation: goldPulse 0.38s infinite alternate ease-in-out;
+}
+
+@keyframes goldPulse {
+  0% { transform: scale(1) rotate(-3deg); }
+  100% { transform: scale(1.08) rotate(3deg); }
+}
+
+/* 🐡 3. SPIKY PUFFERFISH HAZARD (OPTION A - HARMONIZED CUTE STYLE) */
+.puffer-svg {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 6px 12px rgba(154, 52, 18, 0.45));
+  animation: pufferSpikePulse 0.5s infinite alternate ease-in-out;
+}
+
+@keyframes pufferSpikePulse {
+  0% { transform: scale(0.92); }
+  100% { transform: scale(1.08); }
+}
+
+/* ==========================================================================
+   PARTICLES, SPLASHES & SCREEN SHOCK FLASH
+   ========================================================================== */
+.particle-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 25;
+}
+
+.score-bubble {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.6rem;
+  color: #fde047;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8), 0 0 15px rgba(253, 224, 71, 0.8);
+  transform: translate(-50%, -50%);
+  animation: floatUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  z-index: 30;
+}
+
+.score-bubble.gold {
+  color: #f59e0b;
+  font-size: 1.95rem;
+  text-shadow: 0 0 20px rgba(245, 158, 11, 0.9);
+}
+
+.score-bubble.ouch {
+  color: #ef4444;
+  font-size: 2rem;
+  text-shadow: 0 0 20px rgba(239, 68, 68, 0.9);
+}
+
+@keyframes floatUp {
+  0% { opacity: 0; transform: translate(-50%, 0) scale(0.6); }
+  25% { opacity: 1; transform: translate(-50%, -25px) scale(1.2); }
+  100% { opacity: 0; transform: translate(-50%, -65px) scale(0.9); }
+}
+
+/* Red Shock Screen Flash */
+.shock-flash-screen {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.55) 0%, rgba(185, 28, 28, 0.8) 100%);
+  z-index: 35;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.08s ease;
+}
+
+.shock-flash-screen.flash {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   OVERLAYS & TROPICAL SIGNBOARDS
+   ========================================================================== */
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 14, 28, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.game-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Tropical Wooden Signboard */
+.beach-sign-board {
+  background: linear-gradient(135deg, #78350f 0%, #451a03 100%);
+  border: 4px solid #b45309;
+  border-radius: var(--radius-xl);
+  padding: 2rem 1.85rem;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: var(--shadow-wood), inset 0 2px 6px rgba(255, 255, 255, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  animation: signDrop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sign-board-sm {
+  max-width: 380px;
+}
+
+@keyframes signDrop {
+  0% { transform: translateY(-30px) scale(0.95); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.sign-top-decor {
+  font-size: 2.3rem;
+  line-height: 1;
+}
+
+.sign-title {
+  font-family: var(--font-display);
+  font-size: 2.15rem;
+  font-weight: 900;
+  color: #fef08a;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.7);
+  letter-spacing: -0.02em;
+}
+
+.sign-subtitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fed7aa;
+}
+
+/* Rules / Instructions Box */
+.sign-rules-box {
+  background: rgba(0, 0, 0, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  text-align: left;
+}
+
+.rule-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.rule-icon {
+  font-size: 1.35rem;
+  width: 26px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.rule-desc {
+  font-size: 0.88rem;
+  color: #e2e8f0;
+}
+
+.rule-hazard .rule-desc strong {
+  color: #f87171;
+}
+
+/* Buttons */
+.btn-beach-play {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border: 2px solid #fef08a;
+  color: #451a03;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 900;
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(217, 119, 6, 0.5);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  transition: all 0.2s ease;
+}
+
+.btn-beach-play:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(217, 119, 6, 0.7);
+  filter: brightness(1.08);
+}
+
+.btn-beach-secondary {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-beach-secondary:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.pause-actions, .game-over-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* Final Score Card */
+.game-stats-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.stat-score-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.hero-lbl {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #cbd5e1;
+}
+
+.hero-val {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: #fde047;
+  text-shadow: 0 0 15px rgba(253, 224, 71, 0.5);
+  line-height: 1;
+}
+
+.stats-mini-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 0.75rem;
+}
+
+.mini-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-lbl {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+.mini-val {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MOBILE ADAPTATION)
+   ========================================================================== */
+@media (max-width: 600px) {
+  .arcade-wrapper {
+    padding: 0;
+    min-height: calc(100vh - 52px);
+    background: transparent;
+  }
+
+  .arcade-wrapper::before {
+    display: none;
+  }
+
+  .game-viewport {
+    max-width: 100%;
+    height: calc(100vh - 52px);
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  .game-hud-bar {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 0.35rem 0.75rem;
+  }
+
+  .hud-score-val {
+    font-size: 1.45rem;
+  }
+
+  .creature-node {
+    width: 86px;
+    height: 78px;
+  }
+
+  .beach-sign-board {
+    padding: 1.6rem 1.25rem;
+    max-width: 92%;
+  }
+
+  .sign-title {
+    font-size: 1.85rem;
+  }
+}

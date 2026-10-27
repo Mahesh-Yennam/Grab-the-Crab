@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <defs>
+    <radialGradient id="sunGrad" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="60%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </radialGradient>
+    <linearGradient id="crabGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff6b81"/>
+      <stop offset="40%" stop-color="#ff4757"/>
+      <stop offset="100%" stop-color="#ee5253"/>
+    </linearGradient>
+    <linearGradient id="clawInner" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff9f89"/>
+      <stop offset="100%" stop-color="#ff7675"/>
+    </linearGradient>
+    <linearGradient id="sandGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff2cc"/>
+      <stop offset="100%" stop-color="#ebd092"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Circular Badge -->
+  <circle cx="32" cy="32" r="30" fill="url(#sunGrad)" stroke="#fde047" stroke-width="2.5"/>
+
+  <!-- Warm Sand at Bottom -->
+  <ellipse cx="32" cy="54" rx="26" ry="14" fill="url(#sandGrad)"/>
+
+  <!-- Cute Crab Group -->
+  <g filter="url(#shadow)">
+    <!-- Legs Left -->
+    <path d="M20 42 C14 42 10 46 12 53" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+    <path d="M21 45 C16 47 13 52 15 58" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+    <!-- Legs Right -->
+    <path d="M44 42 C50 42 54 46 52 53" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+    <path d="M43 45 C48 47 51 52 49 58" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+    <!-- Left Raised Claw -->
+    <path d="M22 36 C16 32 15 24 18 20 C20 26 24 30 25 33 Z" fill="#ff4757" stroke="#c0392b" stroke-width="1"/>
+    <path d="M18 20 C14 17 17 9 25 8 C30 7 33 11 27 16 C23 20 19 22 18 20 Z" fill="url(#crabGrad)" stroke="#c0392b" stroke-width="1"/>
+    <path d="M19 17 C16 14 19 11 24 10 C26 12 24 16 19 17 Z" fill="url(#clawInner)"/>
+
+    <!-- Right Raised Claw -->
+    <path d="M42 36 C48 32 49 24 46 20 C44 26 40 30 39 33 Z" fill="#ff4757" stroke="#c0392b" stroke-width="1"/>
+    <path d="M46 20 C50 17 47 9 39 8 C34 7 31 11 37 16 C41 20 45 22 46 20 Z" fill="url(#crabGrad)" stroke="#c0392b" stroke-width="1"/>
+    <path d="M45 17 C48 14 45 11 40 10 C38 12 40 16 45 17 Z" fill="url(#clawInner)"/>
+
+    <!-- Rounded Body -->
+    <ellipse cx="32" cy="40" rx="16" ry="11" fill="url(#crabGrad)" stroke="#c0392b" stroke-width="1.2"/>
+    <ellipse cx="32" cy="35" rx="10" ry="4" fill="#ff7675" opacity="0.5"/>
+
+    <!-- Cheeks -->
+    <circle cx="23" cy="41" r="2.5" fill="#fab1a0" opacity="0.9"/>
+    <circle cx="41" cy="41" r="2.5" fill="#fab1a0" opacity="0.9"/>
+
+    <!-- Eyes -->
+    <circle cx="27" cy="35" r="3.4" fill="#1e293b"/>
+    <circle cx="26" cy="34" r="1.3" fill="#ffffff"/>
+    <circle cx="28" cy="36" r="0.6" fill="#ffffff"/>
+
+    <circle cx="37" cy="35" r="3.4" fill="#1e293b"/>
+    <circle cx="36" cy="34" r="1.3" fill="#ffffff"/>
+    <circle cx="38" cy="36" r="0.6" fill="#ffffff"/>
+
+    <!-- Smile -->
+    <path d="M30 40 Q32 43 34 40" stroke="#1e293b" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>
